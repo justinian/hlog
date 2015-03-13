@@ -18,4 +18,4 @@ Optionally, you can substitute a different URL for the default one by adding a
 
 ## Installing
 
-If you've got Go installed, just run `go install github.com/justinian/hlog`.
+If you've got Go installed, just run `go get github.com/justinian/hlog`.
