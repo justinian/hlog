@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"crypto/tls"
 	"encoding/json"
 	"log"
 	"net/http"
@@ -27,8 +28,15 @@ func main() {
 		log.Fatal(err)
 	}
 
+	tr := &http.Transport{}
+	if !config.Connection.Verify_Ssl {
+		tr.TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
+	}
+
+	cl := &http.Client{Transport: tr}
+
 	buf := bytes.NewBuffer(data)
-	resp, err := http.Post(url, "application/json", buf)
+	resp, err := cl.Post(url, "application/json", buf)
 	if err != nil {
 		log.Fatal(err)
 	}

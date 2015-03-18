@@ -9,11 +9,17 @@ type Config struct {
 		Token string
 		Url   string
 	}
+	Connection struct {
+		Verify_Ssl bool
+	}
 }
 
 var defaultConfig = `
 	[logs]
 	url = https://www.hakkalabs.co/api/webhooks?service=custom
+
+	[connection]
+	verify-ssl = true
 `
 
 func getConfig(filename string) (*Config, error) {
