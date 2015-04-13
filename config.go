@@ -6,8 +6,9 @@ import (
 
 type Config struct {
 	Logs struct {
-		Token string
-		Url   string
+		Token           string
+		Url             string
+		Default_Privacy string
 	}
 	Connection struct {
 		Verify_Ssl bool
@@ -17,6 +18,7 @@ type Config struct {
 var defaultConfig = `
 	[logs]
 	url = https://www.hakkalabs.co/api/webhooks?service=custom
+	default-privacy = private
 
 	[connection]
 	verify-ssl = true

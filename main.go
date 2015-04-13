@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"crypto/tls"
 	"encoding/json"
+	"flag"
 	"log"
 	"net/http"
 	"os"
@@ -12,6 +13,7 @@ import (
 
 type Log struct {
 	Message string `json:"log"`
+	Privacy string `json:"state"`
 }
 
 func main() {
@@ -22,8 +24,16 @@ func main() {
 			os.Args[0], configfile, err.Error())
 	}
 
+	privacy := flag.String("priv", config.Logs.Default_Privacy, "Privacy level to log with (public, anonymous, private)")
+	flag.Parse()
+
+	logItem := Log{
+		Message: strings.Join(flag.Args(), " "),
+		Privacy: *privacy,
+	}
+
 	url := config.Logs.Url + "&token=" + config.Logs.Token
-	data, err := json.Marshal(Log{strings.Join(os.Args[1:], " ")})
+	data, err := json.Marshal(logItem)
 	if err != nil {
 		log.Fatal(err)
 	}

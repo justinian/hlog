@@ -10,11 +10,16 @@ hlog looks for its config in `$HOME/.hakkarc`, in the following format:
 ```
 [logs]
 token = your_hakka_logs_webhook_token
+default-privacy = private
 ```
 
 Optionally, you can substitute a different URL for the default one by adding a
 `url = http://some.custom.domain/path?foo=bar` - just be sure to leave off the
 `&token=your_token..` part, as hlog appends this automatically.
+
+The `default-privacy` parameter defaults to `private`, but you can also set
+it to `public` or `anonymous`. You can also set this per-log with the
+`-priv=<anonymous|public|private>` command-line flag.
 
 If you're having TLS handshake issues, please let me know. As a temporary
 workaround, you can try turning off TLS certificate validation by adding the
